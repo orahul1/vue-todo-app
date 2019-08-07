@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="container">
       <p class="title">To-do List</p>
-      <p class="empty" v-if="todoList.length == 0 && doneList.length == 0">Your List is empty !</p>
+      <p class="empty" v-if="todoList.length == 0">Your To-do list is empty !</p>
       <div class="todo_wrapper" v-for="todo in todoList" :key="todo">
         <div class="todo">{{todo}}</div>
         <button class="btn done_btn" @click="todoCompleted(todo)">Done</button>
@@ -25,7 +25,7 @@ export default Vue.extend({
   name: "ListComponent",
   data() {
     return {
-      todoList: [],
+      todoList: ['Webpack configuration','All life cycle hooks use', 'Class and Style Binding', 'Vue Store use', 'Props use'],
       doneList: []
     };
   },
@@ -84,6 +84,7 @@ export default Vue.extend({
     }
     .empty {
       color: #ffff;
+      padding: 20px 0px;
     }
     .done_title {
       color: #06e978;

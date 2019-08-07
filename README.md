@@ -1,5 +1,11 @@
 # to-do
 
+##Features
+```
+BASIC PROJECT STRUCTURE
+COMPONENT COMMUNICATION
+```
+
 ## Project setup
 ```
 npm install
