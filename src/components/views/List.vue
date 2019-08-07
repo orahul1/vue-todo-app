@@ -25,8 +25,8 @@ export default Vue.extend({
   name: "ListComponent",
   data() {
     return {
-      todoList: ['Webpack configuration','All life cycle hooks use', 'Class and Style Binding', 'Vue Store use', 'Props use'],
-      doneList: []
+      todoList: ['Add todo with id for filter','Webpack configuration','All life cycle hooks use', 'Class and Style Binding', 'Vue Store use', 'Props use'],
+      doneList: ['Basic project structure', 'Component communication(emit)']
     };
   },
   mounted() {
