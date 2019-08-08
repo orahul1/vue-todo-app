@@ -3,15 +3,15 @@
     <div class="container">
       <p class="title">To-do List</p>
       <p class="empty" v-if="todoList.length == 0">Your To-do list is empty !</p>
-      <div class="todo_wrapper" v-for="todo in todoList" :key="todo">
-        <div class="todo">{{todo}}</div>
+      <div class="todo_wrapper" v-for="todo in todoList.slice().reverse()" :key="todo.id">
+        <div class="todo">{{todo.todo}}</div>
         <button class="btn done_btn" @click="todoCompleted(todo)">Done</button>
         <button class="btn delete" @click="deleteTodo(todo,'active')">Delete</button>
       </div>
       <span v-if="doneList.length > 0">
         <p class="done_title">Done List</p>
-        <div class="todo_wrapper done_wrapper" v-for="doneTodo in doneList" :key="doneTodo">
-          <div class="todo done">{{doneTodo}}</div>
+        <div class="todo_wrapper done_wrapper" v-for="doneTodo in doneList.slice().reverse()" :key="doneTodo.id">
+          <div class="todo done">{{doneTodo.todo}}</div>
           <button class="btn delete" @click="deleteTodo(doneTodo,'notactive')">Delete</button>
         </div>
       </span>
@@ -25,28 +25,36 @@ export default Vue.extend({
   name: "ListComponent",
   data() {
     return {
-      todoList: ['Add todo with id for filter','Webpack configuration','All life cycle hooks use', 'Class and Style Binding', 'Vue Store use', 'Props use'],
-      doneList: ['Basic project structure', 'Component communication(emit)']
+      todoList: [
+        { todo: "Add todo with id for filter", id: 1 },
+        { todo: "Webpack configuration", id: 2 },
+        { todo: "All life cycle hooks use", id: 3 },
+        { todo: "Class and Style Binding", id: 4 },
+        { todo: "Vue Store use", id: 5 },
+        { todo: "Props use", id: 6 }
+      ],
+      doneList: [
+        { todo: "Basic project structure", id: 7 },
+        { todo: "Component communication(emit)", id: 8 }
+      ]
     };
   },
   mounted() {
+    let count = this.todoList.length + this.doneList.length + 1;
     this.$root.$on("newTodo", todo => {
-      this.todoList.push(todo);
+      this.todoList.push({ todo: todo, id: count++ });
     });
   },
   methods: {
-    /* TODO: push an id with each todo, use that to compare because duplicate error while filtering
-       reason : multiple todo with SAME NAME :) 
-    */
     todoCompleted(todo) {
-      this.todoList = this.todoList.filter(item => item != todo); //need to change 
+      this.todoList = this.todoList.filter(item => item.id != todo.id);
       this.doneList.push(todo);
     },
-    deleteTodo(todo,status) {
-      if(status == 'notactive'){
-      this.doneList = this.doneList.filter(item => item != todo) //need to change 
-      }else{
-        this.todoList = this.todoList.filter(item => item != todo); //need to change 
+    deleteTodo(todo, status) {
+      if (status == "notactive") {
+        this.doneList = this.doneList.filter(item => item.id != todo.id);
+      } else {
+        this.todoList = this.todoList.filter(item => item.id != todo.id);
       }
     }
   }
