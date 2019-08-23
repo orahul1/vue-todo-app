@@ -1,5 +1,6 @@
-import Vue from 'vue'
+import Vue from 'vue';
 import AppView from './components/App.vue';
+import store from './store';
 
 
 /* Gobal styles */
@@ -33,6 +34,7 @@ Vue.config.productionTip = false
 
 
 new Vue({
+  store,
   render: h => h(AppView),
   router: router
 }).$mount('#app')

@@ -19,6 +19,7 @@ export default Vue.extend({
   methods: {
     addTodo(){
       if(this.todo != ''){
+      //Emit data when user add new todo
       this.$root.$emit('newTodo', this.todo);
       this.todo = '';
       }

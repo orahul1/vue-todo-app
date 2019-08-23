@@ -26,31 +26,48 @@ export default Vue.extend({
   data() {
     return {
       todoList: [
-        { todo: "Add todo with id for filter", id: 1 },
-        { todo: "Webpack configuration", id: 2 },
-        { todo: "All life cycle hooks use", id: 3 },
-        { todo: "Class and Style Binding", id: 4 },
-        { todo: "Vue Store use", id: 5 },
-        { todo: "Props use", id: 6 }
+        { 
+          todo: "Props use", 
+          id: 1 
+        },
+        { 
+          todo: "Fetch and Post data from api", 
+          id: 2 
+        }
       ],
       doneList: [
-        { todo: "Basic project structure", id: 7 },
-        { todo: "Component communication(emit)", id: 8 }
+        { 
+          todo: "Basic project structure",
+          id: 3 
+        },
+        { 
+          todo: "Component communication(emit)", 
+          id: 4 
+        },
+        {
+           todo: "Add todo with id for filter", 
+           id: 5 
+        }
       ]
     };
   },
   mounted() {
+    //create new id for todo => For delete 
     let count = this.todoList.length + this.doneList.length + 1;
+    //Listen to add component's new todo  
     this.$root.$on("newTodo", todo => {
+    //Push to the todo list
       this.todoList.push({ todo: todo, id: count++ });
     });
   },
   methods: {
     todoCompleted(todo) {
+      //Receive single todo details from function and filter from todolist
       this.todoList = this.todoList.filter(item => item.id != todo.id);
       this.doneList.push(todo);
     },
     deleteTodo(todo, status) {
+      //2 Array of todo present =>  status => Done and Active
       if (status == "notactive") {
         this.doneList = this.doneList.filter(item => item.id != todo.id);
       } else {

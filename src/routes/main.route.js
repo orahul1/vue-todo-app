@@ -1,10 +1,24 @@
-import HomeComponent from '../components/views/Home.vue';
-
+import MainHomeComponent from '../components/Home.vue';
+import HomeEventComponent from '../components/views-event-emitter/HomeEvent.vue';
+import HomeStoreComponent from '../components/views-store/HomeStore.vue';
 
 const routes = [
   {
-    path:'/',
-    component: HomeComponent
+    path:'',
+    component: MainHomeComponent,
+    redirect:'todo-event-emitter',
+    children : [
+      {
+        path: 'todo-event-emitter',
+        component: HomeEventComponent,
+        name: 'todo-event-emitter'
+      },
+      {
+        path: 'todo-store',
+        component: HomeStoreComponent,
+        name: 'todo-store'
+      }
+    ]
   }
 ]
 
